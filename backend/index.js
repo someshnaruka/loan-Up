@@ -31,7 +31,8 @@ app.use(
       collectionName:"sessions",
       ttl: 1 * 24 * 60 * 60,
       autoRemove: 'native'}),
-      cookie: { maxAge: 24 * 60 * 60 * 1000 },
+      cookie: { maxAge: 24 * 60 * 60 * 1000,
+      secure:true },
     })
   );
 app.use(passport.initialize());
