@@ -32,7 +32,7 @@ app.use(
       ttl: 1 * 24 * 60 * 60,
       autoRemove: 'native'}),
       cookie: { maxAge: 24 * 60 * 60 * 1000,
-      secure:true },
+         },
     })
   );
 app.use(passport.initialize());
@@ -82,14 +82,14 @@ const UserSchema = new mongoose.Schema({
     callbackURL: `${process.env.REACT_APP_SERVER_DOMAIN}/auth/google/callback`,
     scope:["profile","email"]
   },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id,
+  async function(accessToken, refreshToken, profile, cb) {
+    await User.findOrCreate({ googleId: profile.id,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         username: profile.emails[0].value,
-        profilePic: profile.photos[0].value, }, function (err, user) {
-      return cb(err, user);
-    });
+        profilePic: profile.photos[0].value, },function (err, user) {
+          return cb(err, user);
+        })
   }
 ));
 

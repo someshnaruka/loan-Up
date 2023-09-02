@@ -11,9 +11,11 @@ import Loan from './pages/Loan';
 import Applications from './pages/Applications';
 function App() {
 const dispatch=useDispatch();
+axios.defaults.withCredentials = true;
   useEffect(()=>{
 axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/auth/user", {
   withCredentials: true,
+  
 }).then((response)=>{
   if(response.data.alert)
   {
