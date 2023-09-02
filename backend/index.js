@@ -20,6 +20,7 @@ app.use(express.json());
 const PORT=process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.set("trust proxy", 1);
 app.use(
     session({
       name:"google",
