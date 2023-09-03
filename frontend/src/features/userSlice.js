@@ -12,7 +12,7 @@ export const userSlice=createSlice({
     initialState,
     reducers:{
         loginRedux:(state,action)=>{
-            console.log(action.payload);
+            
             state._id = action.payload._id;
       state.name = action.payload.name;
       state.googleId = action.payload.googleId;

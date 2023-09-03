@@ -92,16 +92,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log(req.headers);
+
   if (!req.headers.authorization) {
     return res.send({ status: 500, message: "invalid token" });
   }
 
   const token = req.headers.authorization.split(" ")[1];
-  console.log(token, "token value");
+
   try {
     const decodevalue = await admin.auth().verifyIdToken(token);
-    console.log(decodevalue);
+
 
     function updateUser(decodevalue, req, res) {
       const filter = { googleId: decodevalue.user_id };
@@ -124,7 +124,7 @@ app.post("/login", async (req, res) => {
       res.send({ alert: false, message: "un Authorized User" });
     }
     const userData = await User.findOne({ googleId: decodevalue.user_id });
-    console.log(userData);
+
     if (!userData) {
       const newuser = new User({
         name: decodevalue.name,
@@ -157,16 +157,16 @@ app.post("/login", async (req, res) => {
 
 
 app.get("/auth/user", async(req, res) => {
-  console.log(req.headers);
+ 
   if (!req.headers.authorization) {
     return res.send({ status: 500, message: "invalid token" });
   }
 
   const token = req.headers.authorization.split(" ")[1];
-  console.log(token, "token value");
+  
   try {
     const decodevalue = await admin.auth().verifyIdToken(token);
-    console.log(decodevalue);
+   
 
     if (!decodevalue) {
       res.send({ alert: false, message: "un Authorized User" });
@@ -189,7 +189,7 @@ app.get("/auth/user", async(req, res) => {
 
 
 app.post("/loanRecord", (req, res) => {
-  console.log(req.body);
+
 
   const result = {
     creator: req.body.id,
@@ -206,7 +206,7 @@ app.post("/loanRecord", (req, res) => {
     .save()
     .then(() => {
       Record.findOne({ recordId: req.body.recordId }).then((data) => {
-        console.log(data, "SingleBalance");
+      
         res.send({
           result: data,
           message: "Balance Sheet Created",
@@ -231,9 +231,9 @@ app.get("/applications", (req, res) => {
 });
 
 app.post("/decision", (req, res) => {
-  console.log(req.body, "decsion value");
+
   const { sheet } = req.body;
-  console.log(sheet, "sheet");
+ 
   const totalProfit = sheet.reduce((acc, obj) => {
     return acc + Number(obj.profitOrLoss);
   }, 0);
@@ -242,8 +242,7 @@ app.post("/decision", (req, res) => {
       return acc + Number(obj.assetsValue);
     }, 0) / 12
   );
-  console.log(totalAssest, "assest");
-  console.log(totalProfit, "profit");
+
 
   const decsion = {
     name: req.body.company_Name,

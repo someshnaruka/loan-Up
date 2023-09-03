@@ -19,7 +19,7 @@ function Navbar() {
   const [cookie, setCookie, removeCookie] = useCookies();
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  console.log(data);
+ 
 
   
   function handleLogin() {
@@ -28,9 +28,9 @@ function Navbar() {
       .then(async(result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log(credential);
+        
         const token = await auth.currentUser.getIdToken(true);
-        console.log(token);
+      
         // The signed-in user info.
         const user = result.user;
         window.localStorage.setItem("auth","true");
@@ -41,7 +41,7 @@ function Navbar() {
           headers: { 'Authorization': 'Bearer ' + token }
         };
         axios.post((process.env.REACT_APP_SERVER_DOMAIN+"/login"),data,headers).then((response)=>{
-        console.log(response);
+      
         if(response.data.alert)
         {
           toast(response.data.message)

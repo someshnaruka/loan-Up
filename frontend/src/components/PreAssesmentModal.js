@@ -5,7 +5,7 @@ function PreAssesmentModal({onclose}) {
     const data=useSelector((state)=>state.data.preAsses);
     
     const value=Number(data.loanAmount)*(data.preAssessment/100)
-    console.log(data);
+   
   return (
     <>
  <div className="w-full h-full fixed  top-0 bottom-0 left-0 right-0 z-40 cursor-pointer flex items-center justify-center   p-3 bg-[rgba(0,0,0,0.4)]" onClick={onclose}>

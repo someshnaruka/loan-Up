@@ -6,7 +6,7 @@ function BalanceSheet({ id, onclose ,onSubmit}) {
   const data = useSelector((state) => state.data.applications);
   const filterdata = data.filter((post) => post._id === id);
 
-  console.log(filterdata);
+
 
   return (
     <>

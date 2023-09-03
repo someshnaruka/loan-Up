@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 function LoanBalanceSheet({onSubmit,onclose}) {
 
     const filterdata=useSelector((state)=>state.data.ViewBalance)
-    console.log(filterdata);
+ 
   return (
     <>
         <div className="w-full  h-full fixed overflow-y-scroll  top-0 bottom-0 left-0 right-0 z-40 cursor-pointer flex items-start justify-center   p-3 bg-[rgba(0,0,0,0.4)]" onClick={onclose}>

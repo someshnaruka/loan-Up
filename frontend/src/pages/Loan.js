@@ -37,7 +37,7 @@ setDetail((prev)=>{
 })
 }
 
-console.log(detail);
+
 
 function handledataSubmit(e){
 e.preventDefault();
@@ -80,7 +80,7 @@ if(wasNull===false && detail.estdyear && detail.name && detail.loanAmount && det
     record:Tabledata,
   }
   
-  console.log(sendData);
+  
   axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/loanRecord",sendData).then((response)=>{
   if(response.data.alert)
   {
@@ -93,7 +93,7 @@ if(wasNull===false && detail.estdyear && detail.name && detail.loanAmount && det
       name:"",
     estdyear:"",
     provider:"",
-    loanAmount:null,
+    loanAmount:"",
     })
   }
   })
@@ -104,13 +104,15 @@ else{
 }
 }
 function handleSubmit(value){
-  console.log(value,"decision");
+ 
 axios.post(process.env.REACT_APP_SERVER_DOMAIN+ "/decision",value).then((response)=>{
   if(response.data.alert)
   {
       dispatch(preAssesRedux(response.data.result))
       setAsses(true);
   }
+}).catch((err)=>{
+  console.log(err);
 })
 }
 

@@ -11,7 +11,7 @@ function Table({post}) {
 const dispatch=useDispatch();
 const tableData=useSelector((state)=>state.data.table)
     const [editIndex,setEditindex]=useState([]);
-    console.log(editIndex,"edit value");
+
     if(edit==false)
     {
         document.body.style.overflow = 'unset';

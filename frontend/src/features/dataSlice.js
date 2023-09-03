@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const date=new Date().getFullYear()-1;
-console.log(date);
+
 const initialState = {
     dataValue:[],
     balanceSheet:[],
@@ -86,13 +86,13 @@ export const dataSlice=createSlice({
     initialState,
     reducers:{
         dataRedux:(state,action)=>{
-            console.log(action.payload);
+           
             state.dataValue=[action.payload]
         },
         editRedux:(state,action)=>{
-            console.log(action.payload);
+         
             const index=state.table.findIndex((item)=>item.month===action.payload.month);
-            console.log(index);
+           
             state.table[index].profitOrLoss=action.payload.profitOrLoss;
             state.table[index].assetsValue=action.payload.assetsValue;
         },
@@ -107,14 +107,14 @@ export const dataSlice=createSlice({
         balanceRedux:(state,action)=>{
            
             state.applications=action.payload;
-            console.log(state.applications);
+        
         },
         preAssesRedux:(state,action)=>{
-            console.log(action.payload);
+          
             state.preAsses=action.payload
         },
         ViewRedux:(state,action)=>{
-            console.log(action.payload,"view redux");
+           
             state.ViewBalance=action.payload;
         }
     }

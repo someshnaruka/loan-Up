@@ -16,24 +16,28 @@ function App() {
   const firebaseAuth=getAuth(app);
 const dispatch=useDispatch();
 axios.defaults.withCredentials = true;
-  useEffect(async()=>{
-   
-const token=localStorage.getItem("token");
-if(token)
-{
-  axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/auth/user",{
-
-    headers: {
-      Authorization: "Bearer " + token,
-    }}).then((response)=>{
-      if(response.data.alert)
+  useEffect(()=>{
+    const getUser=async()=>{
+      const token=localStorage.getItem("token");
+      if(token)
       {
-        dispatch(loginRedux(response.data.result));
-      }
-    }).catch((err)=>{
-      console.log(err);
-    })
+        axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/auth/user",{
+      
+          headers: {
+            Authorization: "Bearer " + token,
+          }}).then((response)=>{
+            if(response.data.alert)
+            {
+              dispatch(loginRedux(response.data.result));
+            }
+          }).catch((err)=>{
+            console.log(err);
+          })
+    }
+  
 }
+
+getUser();
   },[])
   return (
     <div className="App ">

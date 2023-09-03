@@ -8,7 +8,7 @@ import { editRedux } from "../features/dataSlice";
 function Modal(props) {
     const tableData=useSelector((state)=>state.data.dataValue)
     const dispatch=useDispatch();
-console.log(tableData);
+
     const [value,setValue]=useState( tableData[0] || {  
         // month:"",
         profitOrLoss:0,
@@ -32,7 +32,7 @@ props.close();
             }
         });
     }
-console.log(value);
+
   return (
     <div className="w-full h-full  fixed top-0 bottom-0 left-0 right-0      z-40 cursor-pointer flex items-center justify-center  rounded-lg p-3 bg-[rgba(0,0,0,0.4)]">
       <form className="md:w-1/4 flex flex-col justify-between gap-2 bg-hero_Blue p-8 rounded-xl items-start ">

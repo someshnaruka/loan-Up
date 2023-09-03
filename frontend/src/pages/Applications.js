@@ -9,7 +9,7 @@ import PreAssesmentModal from "../components/PreAssesmentModal";
 function Applications() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user,"user");
+
   const [userDetail, setUser] = useState({
     username: user.username,
   });
@@ -18,7 +18,7 @@ function Applications() {
   const [showAsses,setAsses]=useState(false)
   const record = useSelector((state) => state.data.applications);
 const [id,setID]=useState(null);
-  console.log(record, "Record");
+  
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_SERVER_DOMAIN + "/applications")
@@ -27,7 +27,7 @@ const [id,setID]=useState(null);
           const filter=response.data.result.filter((item)=>
             item.creator._id===user._id
         )
-          console.log(filter);
+        
           dispatch(balanceRedux(filter));
           setLoading(false);
         }
@@ -35,12 +35,12 @@ const [id,setID]=useState(null);
   }, [user.username]);
 
   function handleClick(id){
-    console.log(id);
+   
     setID(id);
     setShow(true);
   }
 function handleSubmit(value){
-    console.log(value,"decision");
+   
 axios.post(process.env.REACT_APP_SERVER_DOMAIN+ "/decision",value).then((response)=>{
     if(response.data.alert)
     {
@@ -50,7 +50,7 @@ axios.post(process.env.REACT_APP_SERVER_DOMAIN+ "/decision",value).then((respons
 })
 }
 
-  console.log(show);
+
   return (
     <>
         {isLoading || user.username===null ? (

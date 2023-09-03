@@ -3,14 +3,14 @@ import { BiRupee } from 'react-icons/bi';
 
 function Sheet({data}) {
 
-    console.log(data);
+
     const totalProfit=data.sheet.reduce((acc,obj)=>{
         return acc+Number(obj.profitOrLoss);
     },0);
     const totalAssest=data.sheet.reduce((acc,obj)=>{
         return acc+Number(obj.assetsValue);
     },0);
-    console.log(totalAssest);
+  
   return (
    <>
    <div className='w-full'>
