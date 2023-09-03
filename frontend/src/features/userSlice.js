@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     _id:null,
-    firstName: null,
-    lastName: null,
+    name:null,
+    googleId:null,
     username: null,
     profilePic: null,
 };
@@ -14,8 +14,8 @@ export const userSlice=createSlice({
         loginRedux:(state,action)=>{
             console.log(action.payload);
             state._id = action.payload._id;
-      state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
+      state.name = action.payload.name;
+      state.googleId = action.payload.googleId;
       state.username = action.payload.username;
       state.profilePic = action.payload.profilePic;
         },

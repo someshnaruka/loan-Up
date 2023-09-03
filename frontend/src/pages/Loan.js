@@ -211,7 +211,12 @@ axios.post(process.env.REACT_APP_SERVER_DOMAIN+ "/decision",value).then((respons
                   showBalance && <button className="px-6 text-lg py-3 bg-green-600 text-white rounded-xl " onClick={()=>{setSheet(true)}}>Balance Sheet</button>
                 }
                   <button className="px-6 text-lg py-3 bg-[#3E54AC] text-white rounded-xl " onClick={handledataSubmit}>{submitting?<span>Submitting...</span>:<span>Submit</span>}</button>
-                  <button className="px-6 text-lg py-3 bg-red-600 text-white rounded-xl " onClick={()=>{dispatch(resetRedux());setBalance(false)}}> Reset</button>
+                  <button className="px-6 text-lg py-3 bg-red-600 text-white rounded-xl " onClick={()=>{dispatch(resetRedux());setBalance(false); setDetail({
+      name:"",
+    estdyear:"",
+    provider:"",
+    loanAmount:"",
+    })}}> Reset</button>
                 </div>
                
          

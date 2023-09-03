@@ -1,5 +1,5 @@
 import './App.css';
-import {Toaster } from "react-hot-toast";
+import {Toaster, toast } from "react-hot-toast";
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Home from './pages/Home';
 import { useEffect } from 'react';
@@ -9,19 +9,31 @@ import {loginRedux} from "./features/userSlice"
 import Navbar from './components/Navbar';
 import Loan from './pages/Loan';
 import Applications from './pages/Applications';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from './config/firebase';
+import { GiToken } from 'react-icons/gi';
 function App() {
+  const firebaseAuth=getAuth(app);
 const dispatch=useDispatch();
 axios.defaults.withCredentials = true;
-  useEffect(()=>{
-axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/auth/user", {
-  withCredentials: true,
-  
-}).then((response)=>{
-  if(response.data.alert)
-  {
-    dispatch(loginRedux(response.data.result))
-  }
-})
+  useEffect(async()=>{
+   
+const token=localStorage.getItem("token");
+if(token)
+{
+  axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/auth/user",{
+
+    headers: {
+      Authorization: "Bearer " + token,
+    }}).then((response)=>{
+      if(response.data.alert)
+      {
+        dispatch(loginRedux(response.data.result));
+      }
+    }).catch((err)=>{
+      console.log(err);
+    })
+}
   },[])
   return (
     <div className="App ">
