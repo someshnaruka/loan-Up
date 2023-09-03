@@ -12,9 +12,9 @@ const session = require("express-session");
 const findOrCreate = require("mongoose-findorcreate");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { getAuth } = require("firebase-admin/auth");
-const admin = require("firebase-admin");
-const serviceAccount = require("./config/serviceAccountKey.json");
 const { initializeApp } = require("firebase-admin/app");
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
 app.use(
   cors({
     origin: process.env.FRONTEND,
@@ -26,23 +26,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.set("trust proxy", 1);
-// app.use(
-//     session({
-//       name:"google",
-//       secret: process.env.KEY,
-//       resave: false,
-//       saveUninitialized: false, //to inplemnt login sessions,reduce storage size
-//       store: MongoStore.create({mongoUrl: process.env.MONGODB_URL,
-//       collectionName:"sessions",
-//       ttl: 1 * 24 * 60 * 60,
-//       autoRemove: 'native'}),
-//       cookie: { maxAge: 24 * 60 * 60 * 1000,
-//          },
-//     })
-//   );
-// app.use(passport.initialize());
-// app.use(passport.session());
+
 
 main().catch((err) => console.log(err));
 
@@ -102,65 +86,10 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 const Record = mongoose.model("Record", RecordSchema);
-//   passport.use(new GoogleStrategy({
-//     clientID: process.env.GOOGLE_ClIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: `${process.env.REACT_APP_SERVER_DOMAIN}/auth/google/callback`,
-//     scope:["profile","email"]
-//   },
-//   async function(accessToken, refreshToken, profile, cb) {
-//     await User.findOrCreate({ googleId: profile.id,
-//         firstName: profile.name.givenName,
-//         lastName: profile.name.familyName,
-//         username: profile.emails[0].value,
-//         profilePic: profile.photos[0].value, },function (err, user) {
-//           return cb(err, user);
-//         })
-//   }
-// ));
-
-// passport.serializeUser(function (user, cb) {
-//     process.nextTick(function () {
-//       return cb(null, user.id);
-//     });
-//   });
-
-//   passport.deserializeUser(function (id, cb) {
-//     User.findById(id)
-//       .then((user) => {
-//         return cb(null, user);
-//       })
-//       .catch((err) => {
-//         return cb(err);
-//       });
-//   });
 
 app.get("/", (req, res) => {
   res.send("Server running ");
 });
-// app.get(
-//     "/auth/google",
-//     passport.authenticate("google", { scope: ["profile", "email"] })
-//   );
-
-// app.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", {
-//     failureRedirect:process.env.FRONTEND,
-//     successRedirect: process.env.FRONTEND,
-//     failureMessage: "Error loging in try again",
-//   })
-// );
-
-const authToken = (req, res, next) => {
-  const admin = require("firebase-admin");
-  const serviceAccount = require("./config/serviceAccountKey.json");
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
-  next();
-};
 
 app.post("/login", async (req, res) => {
   console.log(req.headers);
